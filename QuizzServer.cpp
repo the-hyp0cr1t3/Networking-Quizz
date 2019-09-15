@@ -100,9 +100,25 @@ int main() {
 				return -1;
 			}
 			
+/*			for (i = 0; i < count; i++)	{
+				std::cout << "Username : " << lbe[i].uname << std::endl;
+				std::cout << "Date and Time : " << lbe[i].date << std::endl;
+				std::cout << "Duration : " << lbe[i].duration << "ms" << std::endl;
+				std::cout << "Score : " << lbe[i].score << std::endl;
+				std::cout << "Questions answered : " << lbe[i].qresult.qtotal << std::endl;
+				std::cout << "Questions answered right : " << lbe[i].qresult.qright << std::endl;
+				std::cout << "Questions answered wrong : " << lbe[i].qresult.qwrong << std::endl;
+				std::cout << "Accuracy : " << lbe[i].accuracy << "%" << std::endl;
+				std::cout << "Speed : " << lbe[i].speed << " Q/s" << std::endl;
+				std::cout <<  "-----------------------------------" << std::endl;
+			}	
+*/			
+			
+			str = "";
 			for (i = 0; i < count; i++)
 				str += ldb_struct_to_string(lbe[i]);						// make single string containing all lbe's
 
+			std::cout << str << std::endl;
 			char p[str.length()+1];										
 			int i;
 			for (i = 0; i < str.length(); i++) { 
