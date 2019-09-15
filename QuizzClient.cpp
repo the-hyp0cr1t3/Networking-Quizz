@@ -32,13 +32,14 @@ int ReadTextFiles() {								/* READ AND CONVERT QUESTIONS FROM ALL TEXT FILES I
 	char answer[20];
 	char buffer[300], buffer1[300], buffer2[10],buffer3[10];
 	WIN32_FIND_DATAA ffd;										// Findfirst block
-	int count = 0, i=0, done = 0;
+	int count = 0, i=0, found = 1, flag = 0;
 	
 	strcpy(buffer1, QBANK);
 	pathof(buffer1,NULL,NULL,buffer);								// assign PATH + QBANK to buffer
 	strcat(buffer, "\\*.txt");									// buffer now is PATH\QBANK\*.txt
-	HANDLE hfile = FindFirstFileA(buffer, &ffd);				// Find first instance of above										
-	while(!done) {
+	HANDLE hfile = FindFirstFileA(buffer, &ffd);				// Find first instance of above				
+	
+	while(found) {
 		count++;
 		strcpy(buffer1, QBANK);
 		pathof(buffer1,NULL,NULL,buffer);
@@ -49,7 +50,8 @@ int ReadTextFiles() {								/* READ AND CONVERT QUESTIONS FROM ALL TEXT FILES I
 		strcpy(buffer1, DUMP);
 		strcpy(buffer2, "Work");
 		strcpy(buffer3, DAT);
-		std::ofstream fout(pathof(buffer1, buffer2, buffer3, buffer), std::ofstream::app | std::ofstream::binary);			//ofstream object appending Work.dat file
+		std::ofstream fout(pathof(buffer1, buffer2, buffer3, buffer), flag ? std::ofstream::app : std::ofstream::out | std::ofstream::binary);			//ofstream object appending Work.dat file
+		flag = 1;
 		fin.seekg(0);
 		Question q;
 		while (!fin.eof()) {
@@ -63,7 +65,7 @@ int ReadTextFiles() {								/* READ AND CONVERT QUESTIONS FROM ALL TEXT FILES I
 		}
 		fin.close();
 		fout.close();
-		done = FindNextFileA(hfile,&ffd);						// Find next instance in directory, returns -1 if no more files detected, 0 if found								
+		found = FindNextFileA(hfile,&ffd);						// Find next instance in directory, returns -1 if no more files detected, 0 if found								
 	}
 	return count;
 }
@@ -421,7 +423,7 @@ int fetch_leaderboards(LeaderboardEntry* lbe) {
 		strcat(recvbuffer, buffer1);
 		std::cout << "Bytes Received : " << bytesRecv << std::endl;
 	}
-//	std::cout << recvbuffer << std::endl;
+	std::cout << recvbuffer << std::endl;
 	
 	
 	/* Close */
