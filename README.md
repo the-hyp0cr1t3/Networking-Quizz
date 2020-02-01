@@ -12,4 +12,4 @@ Note: This was done on a Windows environment and may not work on different envir
 Make sure the following has been done before running:\
 -value stored in PATH macro in mymacros.h should be changed appropriately\
 -create 3 folders within the path and change QBANK, DATA, DUMP macros in mymacros.h to whatever you have named them\
--store a text file inside QBANK (or whatever you've called the subfolder) in the same format as CHEM2.txt as shown\
+-store a text file inside QBANK (or whatever you've called the subfolder) in the same format as CHEM2.txt as shown
